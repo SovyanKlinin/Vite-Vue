@@ -5,18 +5,9 @@
             <a href="/" class="header__logo">MyLogo</a>
 
             <nav class="header__nav">
-                <ul class="header__nav-list">
+                <ul class="header__nav-list" v-for="item in navItems">
                     <li class="header__nav-item">
-                        <a href="#home" class="header__nav-link">Главная</a>
-                    </li>
-                    <li class="header__nav-item">
-                        <a href="#about" class="header__nav-link">О нас</a>
-                    </li>
-                    <li class="header__nav-item">
-                        <a href="#services" class="header__nav-link">Услуги</a>
-                    </li>
-                    <li class="header__nav-item">
-                        <a href="#contact" class="header__nav-link">Контакты</a>
+                        <a :href="item.href" class="header__nav-link">{{ item.title }}</a>
                     </li>
                 </ul>
             </nav>
@@ -27,3 +18,49 @@
         </div>
     </header>
 </template>
+
+<style scoped lang="scss">
+@use "./../styles/mixins.scss";
+
+.header {
+    & .header__container {
+        @include mixins.container;
+        padding-top: 30px;
+
+        & .header__nav {
+            @include mixins.flex;
+            gap: 20px;
+        }
+    }
+}
+</style>
+
+<script>
+export default {
+    data() {
+        return {
+            navItems: [
+                {
+                    href: '#home',
+                    title: 'Главная'
+                },
+
+                {
+                    href: '#about',
+                    title: 'О нас'
+                },
+
+                {
+                    href: '#services',
+                    title: 'Услуги'
+                },
+
+                {
+                    href: '#contact',
+                    title: 'Контакты'
+                },
+            ]
+        }
+    }
+}
+</script>

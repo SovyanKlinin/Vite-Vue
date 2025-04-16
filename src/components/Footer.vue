@@ -7,18 +7,9 @@
                 </div>
                 <nav class="footer__nav">
                     <h4 class="footer__title">Навигация</h4>
-                    <ul class="footer__nav-list">
+                    <ul class="footer__nav-list" v-for="item in navItems">
                         <li class="footer__nav-item">
-                            <a href="#home" class="footer__nav-link">Главная</a>
-                        </li>
-                        <li class="footer__nav-item">
-                            <a href="#about" class="footer__nav-link">О нас</a>
-                        </li>
-                        <li class="footer__nav-item">
-                            <a href="#services" class="footer__nav-link">Услуги</a>
-                        </li>
-                        <li class="footer__nav-item">
-                            <a href="#contact" class="footer__nav-link">Контакты</a>
+                            <a :href="item.href" class="footer__nav-link">{{ item.title }}</a>
                         </li>
                     </ul>
                 </nav>
@@ -38,10 +29,8 @@
                 </div>
                 <div class="footer__social">
                     <h4 class="footer__title">Соцсети</h4>
-                    <div class="footer__social-links">
-                        <a href="https://vk.com" target="_blank" class="footer__social-link">VK</a>
-                        <a href="https://facebook.com" target="_blank" class="footer__social-link">Facebook</a>
-                        <a href="https://instagram.com" target="_blank" class="footer__social-link">Instagram</a>
+                    <div class="footer__social-links" v-for="item in socialItems">
+                        <a :href="item.href" target="_blank" class="footer__social-link">{{ item.title }}</a>
                     </div>
                 </div>
             </div>
@@ -51,3 +40,96 @@
         </div>
     </footer>
 </template>
+
+<style scoped lang="scss">
+@use "./../styles/mixins.scss";
+
+.footer {
+
+    &__container {
+        @include mixins.container;
+        flex-direction: column;
+        gap: 30px;
+        padding: 30px 0 30px;
+
+        .footer__wrapper {
+            @include mixins.container;
+            align-items: flex-start;
+
+            .footer__nav {
+                @include mixins.flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .footer__contacts {
+                @include mixins.flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .footer__social {
+                @include mixins.flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+
+                &-links {
+                    @include mixins.flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+            }
+        }
+    }
+}
+</style>
+
+<script>
+export default {
+    data() {
+        return {
+            navItems: [
+                {
+                    href: '#home',
+                    title: 'Главная'
+                },
+
+                {
+                    href: '#about',
+                    title: 'О нас'
+                },
+
+                {
+                    href: '#services',
+                    title: 'Услуги'
+                },
+
+                {
+                    href: '#contact',
+                    title: 'Контакты'
+                },
+            ],
+
+            socialItems: [
+                {
+                    href: 'https://vk.com',
+                    title: 'VK'
+                },
+
+                {
+                    href: 'https://facebook.com',
+                    title: 'Facebook'
+                },
+
+                {
+                    href: 'https://instagram.com',
+                    title: 'Instagram'
+                },
+            ]
+        }
+    }
+}
+</script>
